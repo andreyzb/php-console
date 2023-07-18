@@ -168,14 +168,15 @@ class Dumper {
 					return;
 				}
 				$data = var_export($data, true);
+
+        if(strlen($data) > $this->itemSizeLimit) {
+          $data = substr($data, 0, $this->itemSizeLimit - 3) . '...';
+        }
+        if(strlen($data) > $sizeLeft) {
+          $data = substr($data, 0, $sizeLeft - 3) . '...';
+        }
+        $sizeLeft -= strlen($data);
 			}
-			if(strlen($data) > $this->itemSizeLimit) {
-				$data = substr($data, 0, $this->itemSizeLimit - 3) . '...';
-			}
-			if(strlen($data) > $sizeLeft) {
-				$data = substr($data, 0, $sizeLeft - 3) . '...';
-			}
-			$sizeLeft -= strlen($data);
 		}
 	}
 }
